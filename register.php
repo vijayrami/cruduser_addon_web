@@ -86,7 +86,7 @@ include_once("header_front.php");
   <body>		
     <div class="container">
     <div class="row">
-        <!---<div class="col-md-4 col-md-offset-4">---> <!--comment this if you use ckeditor---> 
+        <!--<div class="col-md-4 col-md-offset-4">--> <!--comment this if you use ckeditor--> 
             <div class="login-panel panel panel-success">  
                 <div class="panel-heading">  
                     <h3 class="panel-title text-center">Registration</h3>  
