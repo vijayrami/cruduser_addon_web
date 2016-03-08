@@ -33,11 +33,6 @@ if(isset($_POST['admin_login']))//this will tell us what to do if some data has 
     <div class="row">  
         <div class="col-md-4 col-md-offset-4">  
             <div class="login-panel panel panel-success">  
-				<div class="clearfix text-center">
-				
-				  <img border="0" title="company name" alt="company name" src="lib/img/logo.jpg">
-				
-				</div>
                 <div class="panel-heading">  
                     <h3 class="panel-title text-center">Sign In</h3>  
                 </div>  
