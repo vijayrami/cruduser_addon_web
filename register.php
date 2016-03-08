@@ -9,7 +9,7 @@ include_once("database/db_conection.php");
 $error_flag = false;
 $uploadOk = 1;
 $target_dir = "uploads/";
-$user_name = $user_pass = $user_email = $user_gender = "";  
+//$user_name = $user_pass = $user_email = $user_gender = "";  
 
 if(isset($_POST['registeruserbtn'])){
 	$user_name=mysqli_real_escape_string($db_conn,$_POST['name']);//here getting result from the post array after submitting the form. 
@@ -31,6 +31,9 @@ if(isset($_POST['registeruserbtn'])){
     if(mysqli_num_rows($result)>0){
     	$error_flag = true;
     	echo "<div role='alert' class='alert alert-warning alert-dismissible fade in'>Email <strong>$user_email</strong> is already exist in our database, Please try another one!</div>";		
+	} else {
+		$_SESSION['user'] = $user_name;
+		$_SESSION['user_email_id'] = $user_email;
 	}
 	if(is_uploaded_file($_FILES['userfile']['tmp_name'])){			
 		
@@ -67,15 +70,11 @@ if(isset($_POST['registeruserbtn'])){
 		$queryimage = 'Dummy.jpg';
 	}
 	//insert the user into the database.
-	if (($error_flag == false) && ($uploadOk == 1)) {	    
-	$_SESSION['user'] = $user_name;
-	
+	if (($error_flag == false) && ($uploadOk == 1)) {   
 	move_uploaded_file($_FILES["userfile"]["tmp_name"], $finalimagename);
 	$insert_user="insert into user_data (user_name,user_email,user_pass,user_image,user_birth_date,user_gender,user_status,user_country,user_state,user_city,user_address) VALUE ('$user_name','$user_email','$user_pass','$queryimage','$user_birthdate','$user_gender','$user_status','$user_country','$user_state','$user_city','$user_desc')";
 	if(mysqli_query($db_conn,$insert_user))  
     { 
-		$last_id = mysqli_insert_id($db_conn);
-		$_SESSION['user_id'] = $last_id;
         header("Location: home.php"); 
     } 
     } 
@@ -86,7 +85,7 @@ include_once("header_front.php");
   <body>		
     <div class="container">
     <div class="row">
-        <!--<div class="col-md-4 col-md-offset-4">--> <!--comment this if you use ckeditor--> 
+        <!---<div class="col-md-4 col-md-offset-4">---> <!--comment this if you use ckeditor---> 
             <div class="login-panel panel panel-success">  
                 <div class="panel-heading">  
                     <h3 class="panel-title text-center">Registration</h3>  
@@ -96,12 +95,12 @@ include_once("header_front.php");
                         <fieldset>  
                             <div class="form-group"> 
                             	<label for="registerusername11">User Name</label> 
-                                <input type="text" placeholder="Username" name="name" value="<?php echo $user_name; ?>" class="form-control" required autofocus>  
+                                <input type="text" placeholder="Username" name="name" value="" class="form-control" required autofocus>  
                             </div>  
   
                             <div class="form-group">  
                             	<label for="registeremail11">Email address</label> 
-                                <input type="email" placeholder="E-mail" name="email" value="<?php echo $user_email;?>" class="form-control" autofocus required>             
+                                <input type="email" placeholder="E-mail" name="email" value="" class="form-control" autofocus required>             
                             </div> 
 							<div class="form-group"> 
                             	<label for="registerpass11">Password</label>  
