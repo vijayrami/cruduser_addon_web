@@ -22,6 +22,7 @@ if(isset($_POST['login'])){
     if($row['user_pass']== $user_pass)
 	 {
 	  $_SESSION['user'] = $row['user_name'];
+	  $_SESSION['user_email_id'] = $row['user_email'];
 	  header("Location: home.php");
 	 }
 	 else
